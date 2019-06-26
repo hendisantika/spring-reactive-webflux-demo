@@ -15,7 +15,7 @@ public class SpringReactiveWebfluxDemoApplication {
 
     @Bean
     WebClient getWebClient() {
-        return WebClient.create("http://localhost:8081");
+        return WebClient.create("http://localhost:8080");
     }
 
     @Bean
