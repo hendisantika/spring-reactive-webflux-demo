@@ -24,4 +24,13 @@ public class StudentHandler {
 
         return ServerResponse.ok().body(students, Student.class);
     }
+
+    public Mono<ServerResponse> findById(ServerRequest request) {
+        String pathVariable = request.pathVariable("student_id");
+        Integer studentId = Integer.valueOf(pathVariable);
+        Flux<Student> students = Flux.range(1, 20).doOnNext(i -> System.out.println("Student Record : " + i))
+                .map(i -> new Student(i, "student " + i));
+        Mono<Student> next = students.filter(std -> std.getId() == studentId).next();
+        return ServerResponse.ok().body(next, Student.class);
+    }
 }
