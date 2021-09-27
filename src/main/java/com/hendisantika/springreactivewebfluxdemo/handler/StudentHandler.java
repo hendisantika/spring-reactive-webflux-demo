@@ -33,4 +33,10 @@ public class StudentHandler {
         Mono<Student> next = students.filter(std -> std.getId() == studentId).next();
         return ServerResponse.ok().body(next, Student.class);
     }
+
+    public Mono<ServerResponse> addStudent(ServerRequest request) {
+        Mono<Student> bodyToMono = request.bodyToMono(Student.class);
+        Mono<String> student = bodyToMono.map(std -> std.getId() + " : " + std.getName());
+        return ServerResponse.ok().body(student, String.class);
+    }
 }
