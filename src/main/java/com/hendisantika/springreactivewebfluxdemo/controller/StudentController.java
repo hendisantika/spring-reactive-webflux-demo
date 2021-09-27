@@ -21,13 +21,13 @@ import java.util.List;
  * Time: 06.23
  */
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController {
 
     @Autowired
     private StudentService service;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Student> student() {
         return service.getStudents();
     }
