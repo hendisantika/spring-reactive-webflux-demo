@@ -3,9 +3,11 @@ package com.hendisantika.springreactivewebfluxdemo.controller;
 import com.hendisantika.springreactivewebfluxdemo.model.Student;
 import com.hendisantika.springreactivewebfluxdemo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -30,5 +32,9 @@ public class StudentController {
         return service.getStudents();
     }
 
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Student> studentList() {
+        return service.getStudentList();
+    }
 }
 
